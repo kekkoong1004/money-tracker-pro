@@ -14,14 +14,16 @@ function IncomeItem({ data, mutate }) {
   const deleteHandler = async e => {
     e.stopPropagation();
     setDeleteIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    // await new Promise(resolve => setTimeout(resolve, 5000));
     if (type === 'income') {
       await deleteIncome(_id);
     } else if (type === 'expense') {
       await deleteExpense(_id);
     }
     setDeleteIsLoading(false);
+    console.log('delete item before');
     mutate();
+    console.log('delete item after');
   };
 
   const onClickHandler = () => {

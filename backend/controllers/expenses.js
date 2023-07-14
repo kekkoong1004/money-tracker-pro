@@ -12,9 +12,10 @@ exports.addExpense = async (req, res) => {
   }
 
   if (amount <= 0 || typeof amount !== 'number') {
-    return res
-      .status(400)
-      .json({ message: 'Amount must be exceed zero and a number.' });
+    return res.status(400).json({
+      status: 'failed',
+      message: 'Amount must be exceed zero and a number.',
+    });
   }
 
   const newExpense = new Expense({
@@ -28,10 +29,14 @@ exports.addExpense = async (req, res) => {
 
   try {
     await newExpense.save();
-    return res.status(201).json({ message: 'Saving to database success.' });
+    return res
+      .status(201)
+      .json({ status: 'success', message: 'Saving to database success.' });
   } catch (error) {
     console.log(error);
-    return res.status(400).json({ message: 'Saving to database failed.' });
+    return res
+      .status(400)
+      .json({ status: 'failed', message: 'Saving to database failed.' });
   }
 };
 
@@ -100,7 +105,7 @@ exports.deleteExpense = async (req, res) => {
 
     return res
       .status(200)
-      .json({ status: 'success', message: 'Income data deleted.' });
+      .json({ status: 'success', message: 'expense data deleted.' });
   } catch (error) {
     return res
       .status(400)

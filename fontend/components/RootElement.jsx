@@ -13,6 +13,8 @@ function RootElement() {
   const submit = useSubmit();
 
   useEffect(() => {
+    console.log('checking auth../');
+    console.log('auth: ', auth);
     if (!auth) {
       submit(null, { method: 'POST', action: '/logout' });
       navigate('/auth');
@@ -30,5 +32,6 @@ export default RootElement;
 
 export function loader() {
   const userIsAuth = checkAuth();
+  console.log('loader in Root:', userIsAuth);
   return userIsAuth;
 }

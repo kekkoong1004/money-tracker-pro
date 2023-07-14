@@ -1,74 +1,83 @@
 const baseURL = 'http://localhost:3000/api/v1';
 import { getToken } from './auth';
+import axios from 'axios';
 
 export function totalExpenses(expensesArray) {
   const expenses = expensesArray;
 
   let total = 0;
-  expenses.forEach(expense => {
-    total += expense.amount;
-  });
+  if (expenses.length !== 0) {
+    expenses.forEach(expense => {
+      total += expense.amount;
+    });
+  }
   return total;
 }
 
 export async function addExpense(newExpense) {
   const token = getToken();
   // await new Promise(resolve => setTimeout(resolve, 2000));
-  const response = await fetch(`${baseURL}/expense/add-expense`, {
-    method: 'POST',
-    body: JSON.stringify(newExpense),
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    },
-  });
+  const response = await axios.post(
+    `${baseURL}/expense/add-expense`,
+    newExpense,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    }
+  );
 
-  if (!response.ok) {
+  if (response.status !== 201) {
     throw new Error('Adding new expense failed');
   }
 
-  const data = await response.json();
+  const data = response.data;
   return data;
 }
 
 export async function updateExpense(id, updateField) {
   const token = getToken();
-  const response = await fetch(`${baseURL}/expense/update-expense/${id}`, {
-    method: 'PATCH',
-    body: JSON.stringify(updateField),
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token,
-    },
-  });
+  const response = await axios.patch(
+    `${baseURL}/expense/update-expense/${id}`,
+    updateField,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    }
+  );
 
-  if (!response.ok) {
+  if (response.status !== 200) {
     throw new Error('Update expense failed');
   }
-
-  const data = await response.json();
+  console.log(response);
+  const data = response.data;
   return data;
 }
 
 export async function deleteExpense(id) {
   const token = getToken();
-  const response = await fetch(`${baseURL}/expense/delete-expense/${id}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  });
+  const response = await axios.delete(
+    `${baseURL}/expense/delete-expense/${id}`,
+    {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    }
+  );
 
-  if (!response.ok) {
-    const error = await response.json();
+  if (response.status !== 200) {
+    const error = response.data;
     return {
-      status: 'error',
-      error: error,
+      status: 'failed',
+      message: error.message,
     };
   }
 
-  const data = await response.json();
-  console.log(data);
+  const data = await response.data;
+  console.log('delete data: ', data);
   return data;
 }
 

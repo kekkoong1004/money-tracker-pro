@@ -43,7 +43,7 @@ exports.getAllIncomes = async (req, res) => {
 
   try {
     const query = Income.find({
-      user: req.userId,
+      user: userId,
       date: {
         $gte: `${year}-${month}-01`,
         $lt: `${year}-${month + 1}-01`,
@@ -55,7 +55,9 @@ exports.getAllIncomes = async (req, res) => {
 
     // Exec query finally
     const incomes = await finalQuery;
-
+    if (!incomes) {
+      throw new Error('Failed to fetch incomes data.');
+    }
     return res
       .status(200)
       .json({ status: 'success', numOfResult: incomes.length, data: incomes });

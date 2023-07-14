@@ -54,11 +54,8 @@ function Form({ type, mutate, contentData, onUpdate, changeContentShown }) {
         result = await addIncome(formField);
       } else if (type === 'expense') {
         result = await addExpense(formField);
-      } else {
-        return;
       }
 
-      console.log('result added');
       if (result.status === 'failed') {
         setNotification({ status: 'failed', message: `Failed to add ${type}` });
       }
@@ -133,9 +130,7 @@ function Form({ type, mutate, contentData, onUpdate, changeContentShown }) {
           required
           placeholder="Exp: 200.00"
           value={amount}
-          onChange={e => setAmount(+e.target.value)}
-          min={1}
-          step={0.01}
+          onChange={e => setAmount(e.target.value)}
         />
       </div>
 

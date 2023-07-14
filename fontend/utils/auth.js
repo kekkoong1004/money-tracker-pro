@@ -9,7 +9,7 @@ export function loginHandler(token, user) {
   localStorage.setItem('pro-money-tracker-token-user', JSON.stringify(user));
 
   const expiration = new Date();
-  expiration.setMinutes(expiration.getMinutes() + 1);
+  expiration.setHours(expiration.getHours() + 24);
   localStorage.setItem(
     'pro-money-tracker-token-duration',
     expiration.getTime()

@@ -19,7 +19,9 @@ function Transaction() {
     async function getData() {
       setIsLoading(true);
       const data = await getTransactions({ from, to });
-      setTransactions(data.mergedData);
+      if (data.status !== 'failed') {
+        setTransactions(data.mergedData);
+      }
       setIsLoading(false);
     }
 
@@ -30,9 +32,9 @@ function Transaction() {
     if (transactions.length !== 0) {
       const data = groupTransactionsToDate(transactions);
       setGroupedTransactions(data);
-      for (let key in data) {
-        console.log(data[key]);
-      }
+      // for (let key in data) {
+      //   console.log(data[key]);
+      // }
     }
   }, [transactions]);
 

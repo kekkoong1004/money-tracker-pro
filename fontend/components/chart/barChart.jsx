@@ -51,7 +51,7 @@ const BarChart = () => {
     let data;
     data = await getFilterData(filterData);
 
-    if (data && data.data.length !== 0) {
+    if (data && data.status !== 'failed' && data.data.length !== 0) {
       const dataSet = data.data.map(cat => cat.totalAmount);
       setDataSet(dataSet);
       const labels = data.data.map(cat => cat._id);

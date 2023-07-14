@@ -39,7 +39,7 @@ function PieChart() {
   useEffect(() => {
     async function getData() {
       const data = await getFilterData(filterData);
-      if (data) {
+      if (data && data.status !== 'failed') {
         const dataSet = data.data.map(cat => cat.totalAmount);
         setDataSet(dataSet);
         const labels = data.data.map(cat => cat._id);

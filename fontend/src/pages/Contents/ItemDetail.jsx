@@ -22,6 +22,10 @@ function ItemDetail() {
         status: 'success',
         message: `Successfully updated ${type}!`,
       });
+      const num = contentData.type === 'income' ? 1 : 2;
+      setTimeout(() => {
+        changeContentShown(num);
+      }, 1000);
     }
     if (result.status === 'failed') {
       setNotification({

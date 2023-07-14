@@ -13,15 +13,10 @@ function Expense() {
   const thisMonthDigit = new Date(todayDate).getMonth();
 
   useEffect(() => {
-    if (data) {
+    if (data && data.status === 'success') {
       setExpenses(data.data.slice(0, 4));
-
-      if (data.data !== 0) {
-        const total = totalExpenses(data.data);
-        setTotal(total);
-      } else {
-        setTotal(0);
-      }
+      const total = totalExpenses(data.data);
+      setTotal(total);
     }
   }, [data]);
 

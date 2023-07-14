@@ -20,7 +20,7 @@ exports.comparePassword = async (password, hashedPassword) => {
 };
 
 exports.createJSONToken = userId => {
-  return sign({ userId }, jwtSecretKey, { expiresIn: 60 });
+  return sign({ userId }, jwtSecretKey, { expiresIn: 60 * 60 * 24 });
 };
 
 exports.validateJSONToken = token => {

@@ -16,7 +16,7 @@ export async function getFilterData(query) {
   if (!response.ok) {
     const error = await response.json();
     return {
-      status: 'error',
+      status: 'failed',
       error: error,
     };
   }
@@ -78,7 +78,7 @@ export async function getTransactions({ from, to }) {
     if (!response.ok) {
       const error = await response.json();
       throw new Error({
-        status: 'error',
+        status: 'failed',
         message: error,
       });
     }
@@ -87,6 +87,6 @@ export async function getTransactions({ from, to }) {
 
     return data;
   } catch (error) {
-    return error;
+    return { status: 'failed', message: error };
   }
 }
