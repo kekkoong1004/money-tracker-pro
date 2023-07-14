@@ -1,8 +1,4 @@
 {
-  "engines": {
-    "node": "v16.13.1"
-  },
-  "homepage": "https://github.com/kekkoong1004/money-tracker-pro",
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
