@@ -15,7 +15,7 @@ const PORT = process.env.PORT;
 // Middleware
 app.use(cors());
 app.use(express.json()); //Body parser
-app.use(express.static(path.join(__dirname, '../frontend', 'dist')));
+app.use(express.static(path.join(__dirname, '../fontend', 'dist')));
 console.log(path.join(__dirname, '../frontend', 'dist'));
 app.use('/api/v1/expense', expenseRouter);
 app.use('/api/v1/income', incomeRouter);
