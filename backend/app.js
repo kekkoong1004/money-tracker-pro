@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const app = express();
 const fs = require('fs');
 const cors = require('cors');
@@ -14,7 +15,8 @@ const PORT = process.env.PORT;
 // Middleware
 app.use(cors());
 app.use(express.json()); //Body parser
-
+app.use(express.static(path.join(__dirname, '../frontend', 'dist')));
+console.log(path.join(__dirname, '../frontend', 'dist'));
 app.use('/api/v1/expense', expenseRouter);
 app.use('/api/v1/income', incomeRouter);
 app.use('/api/v1/aggregate', aggregateRouter);
