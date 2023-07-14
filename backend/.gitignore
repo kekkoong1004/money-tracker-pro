@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+
+# Dependency directories
+node_modules/
+
+# Build artifacts
+dist/
+
+# Environment variables
+.env
+
+# Editor/IDE specific files
+.vscode/
+.idea/
+*.sublime-*
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Compiled binary files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Miscellaneous
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
