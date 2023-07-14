@@ -38,6 +38,14 @@ function Income() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="flex justify-center items-center">
+        Something went wrong...
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="flex justify-center items-center p-4 m-4">

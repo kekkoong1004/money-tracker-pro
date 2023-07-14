@@ -68,7 +68,10 @@ export async function action({ request }) {
     const resData = await response.json();
     // example resData = { status: 'success', token: '*token-string, user: user,expiresAt:tokenValidity.exp }
     const { token, user } = resData;
-    loginHandler(token, user);
+    const loggedIn = loginHandler(token, user);
+    if (!loggedIn) {
+      throw json({ status: 'failed', message: 'Failed to login.' });
+    }
     return redirect('/');
   } catch (error) {
     console.log(error.message);

@@ -14,6 +14,14 @@ export function loginHandler(token, user) {
     'pro-money-tracker-token-duration',
     expiration.getTime()
   );
+
+  return true;
+}
+
+export function logoutHandler() {
+  localStorage.deleteItem('pro-money-tracker-token');
+  localStorage.deleteItem('pro-money-tracker-token-user');
+  localStorage.deleteItem('pro-money-tracker-token-duration');
 }
 
 export function getUserFromLocalStorage() {

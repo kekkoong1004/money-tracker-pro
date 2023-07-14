@@ -4,6 +4,8 @@ import Orb from '../../components/Orb';
 const ErrorPage = () => {
   const error = useRouteError();
   console.log('from Error page: ', error);
+  console.log('from Error page: ', error.status);
+  console.log('from Error page: ', error.statusText);
   let status = error.status;
   let message = error.statusText;
 

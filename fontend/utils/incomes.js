@@ -84,12 +84,14 @@ export async function deleteIncome(id) {
 }
 
 export function totalIncome(incomesArray) {
-  const token = getToken();
   const incomes = incomesArray;
 
   let total = 0;
-  incomes.forEach(income => {
-    total += income.amount;
-  });
+  if (incomes && incomes.length !== 0) {
+    incomes.forEach(income => {
+      total += income.amount;
+    });
+  }
+
   return total;
 }
