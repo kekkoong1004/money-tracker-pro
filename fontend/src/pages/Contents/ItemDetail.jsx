@@ -2,10 +2,11 @@ import { useContext, useState } from 'react';
 import userContext from '../../../store/user-context';
 import Form from '../../../components/form/TransactionForm';
 import Popup from '../../../components/popup/Popup';
-import Backdrop from '../../../components/popup/backdrop';
+
 import { updateExpense } from '../../../utils/expenses';
 import { capitalizeFirstLetter } from '../../../utils/helpers';
 import { deleteExpense } from '../../../utils/expenses';
+import { deleteIncome } from '../../../utils/incomes';
 
 function ItemDetail() {
   const userCtx = useContext(userContext);
@@ -40,7 +41,13 @@ function ItemDetail() {
       status: 'pending',
       message: `pending...`,
     });
-    const result = await deleteExpense(_id);
+    let result;
+    if (type === 'income') {
+      result = await deleteIncome(_id);
+    } else if (type === 'expense') {
+      result = await deleteExpense(_id);
+    }
+
     if (result.status === 'success') {
       setNotification({
         status: 'success',
@@ -98,9 +105,9 @@ function ItemDetail() {
         </button>
       </div>
       {popup && (
-        <Backdrop>
+        <div className="absolute top-0 left-0 h-full w-full">
           <Popup onConfirm={confirmDelete} onCancel={cancelDelete} />
-        </Backdrop>
+        </div>
       )}
     </div>
   );
